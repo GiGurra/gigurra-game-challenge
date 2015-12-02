@@ -1,0 +1,66 @@
+<Module>
+    <Enums>
+
+        <Team>
+            <RED/>
+            <BLUE/>
+        </Team>
+
+        <GamePhase>
+            <JOINING/>
+            <PLAYING/>
+            <GAME_OVER/>
+        </GamePhase>
+
+    </Enums>
+    <Types>
+
+        <!-- ********** STATE ********** -->
+
+        <Board>
+            <positions type="array[array[Team]]"/>
+        </Board>
+
+        <Player>
+            <name type="string"/>
+            <team type="Team"/>
+        </Player>
+
+        <GameState>
+            <redPlayer type="Player"/>
+            <bluePlayer type="Player"/>
+            <board type="Board">{}</board>
+            <phase type="GamePhase">JOINING</phase>
+        </GameState>
+
+        <Vec2>
+            <x type="int32">0</x>
+            <y type="int32">0</y>
+        </Vec2>
+
+
+        <!-- ********** MESSAGES ********** -->
+
+        <GomokuMessage extends="se.gigurra.aichallenge.GameMessage"/>
+        <RequestFromServer extends="GomokuMessage"/>
+
+        <MakeMoveRequest extends="RequestFromServer"/>
+
+        <MakeMove extends="GomokuMessage">
+            <position type="Vec2"/>
+        </MakeMove>
+
+        <MoveMadeNotification extends="GomokuMessage">
+            <playerName type="String"/>
+            <position type="Vec2"/>
+        </MoveMadeNotification>
+
+        <GameOver extends="GomokuMessage">
+            <reason type="String"/>
+            <winner type="String"/>
+            <loser type="String"/>
+            <endState type="GameState"/>
+        </GameOver>
+
+    </Types>
+</Module>

@@ -1,0 +1,83 @@
+<Module>
+
+    <Enums>
+
+        <GamePhase>
+            <JOINING/>
+            <PLAYING/>
+            <GAME_OVER/>
+        </GamePhase>
+
+        <Team>
+            <O/>
+            <W/>
+            <B/>
+        </Team>
+
+    </Enums>
+
+    <Types>
+
+        <!-- ********** STATE ********** -->
+
+        <Vec2>
+            <x type="int">0</x>
+            <y type="int">0</y>
+        </Vec2>
+
+        <Player>
+            <name type="string"/>
+            <team type="Team"/>
+        </Player>
+
+        <Group>
+            <positions type="array[Vec2]"/>
+            <team type="Team"/>
+        </Group>
+
+        <Board>
+            <width type="int">9</width>
+            <height type="int">9</height>
+            <points type="array[Team]">["O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O","O"]</points>
+        </Board>
+
+        <GameState>
+            <blackPlayer type="Player"/>
+            <whitePlayer type="Player"/>
+            <board type="Board">{}</board>
+            <phase type="GamePhase">JOINING</phase>
+        </GameState>
+
+        <Move>
+            <point type="Vec2">{}</point>
+        </Move>
+
+
+        <!-- ********** MESSAGES ********** -->
+
+        <GoMessage extends="se.gigurra.aichallenge.GameMessage"/>
+        <RequestFromServer extends="GoMessage"/>
+
+        <MoveRequest extends="RequestFromServer">
+            <state type="GameState"/>
+        </MoveRequest>
+
+        <MakeMove extends="GoMessage">
+            <move type="Move"/>
+        </MakeMove>
+
+        <MoveResult extends="GoMessage">
+            <player type="Player"/>
+            <point type="Vec2"/>
+            <removed type="array[Vec2]">[]</removed>
+        </MoveResult>
+
+        <GameOver extends="GoMessage">
+            <reason type="String"/>
+            <winner type="Player"/>
+            <loser type="Player"/>
+            <endState type="GameState"/>
+        </GameOver>
+
+    </Types>
+</Module>

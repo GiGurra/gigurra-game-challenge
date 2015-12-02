@@ -1,0 +1,87 @@
+<Module>
+	<Enums>
+		<GameSelection>
+			<BATTLESHIP />
+			<GOMOKU />
+			<CHESS />
+			<GO />
+		</GameSelection>
+	</Enums>
+	<Types>
+
+		<Message />
+
+		<GameMessage extends="Message" />
+		<LeaveGame extends="GameMessage" />
+
+		<WelcomeMessage extends="Message">
+			<msg type="String" />
+			<availableGames type="List[GameSelection]">[]</availableGames>
+		</WelcomeMessage>
+
+		<ErrorMessage extends="Message">
+			<msg type="String" />
+		</ErrorMessage>
+
+		<Checkin extends="Message">
+			<username type="string" />
+			<password type="string" />
+		</Checkin>
+
+		<RestMessage extends="Message" />
+
+		<RestCheckinReply extends="RestMessage">
+			<session type="string" />
+		</RestCheckinReply>
+
+		<RestListAvail extends="RestMessage" />
+		<RestPostOK extends="RestMessage" />
+		<RestGetAvail extends="RestMessage">
+			<msgtype type="string" />
+		</RestGetAvail>
+
+		<RestListAvailReply extends="RestMessage">
+			<messageTypes type="List[string]" />
+		</RestListAvailReply>
+
+		<RestGetMessagesReply extends="RestMessage">
+			<messages type="List[Message]" />
+		</RestGetMessagesReply>
+
+        <RestGetScores extends="RestMessage"/>
+        <RestGetScoresReply extends="RestMessage">
+            <games type="List[GamePlayed]"/>
+        </RestGetScoresReply>
+
+		<PlayGame extends="Message">
+			<game type="GameSelection" />
+		</PlayGame>
+
+		<GameChallengeFound extends="Message">
+			<game type="GameSelection" />
+			<opponent type="String" />
+		</GameChallengeFound>
+
+		<GamePlayed>
+			<gameType type="GameSelection" />
+			<players type="List[String]">[]</players>
+			<winners type="List[String]">[]</winners>
+		</GamePlayed>
+
+		<User>
+			<name type="String" />
+			<password type="String" />
+		</User>
+
+		<UserDb>
+			<users type="map[String, User]">{}</users>
+			<games type="list[GamePlayed]">[]</games>
+		</UserDb>
+
+        <CmdLineArgs>
+            <zmqPort type="int">12345</zmqPort>
+            <restPort type="int">8080</restPort>
+        </CmdLineArgs>
+
+	</Types>
+</Module>
